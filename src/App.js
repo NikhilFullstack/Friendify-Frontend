@@ -8,7 +8,7 @@ import VerifyEmail from './pages/auth/VerifyEmail';
 import ProfilePage from './pages/profile/Dashboard/ProfilePage';
 import Post from './pages/profile/FeedPage/Post';
 import Setting from './pages/profile/Setting/Setting';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className='overflow-x-hidden min-h-screen w-screen'>

@@ -37,7 +37,7 @@ function Navbar() {
         {token === null && (<Link to='/'>
           <div className="fontLogo text-3xl hover:text-[32px] hover:font-extrabold text-green-600 hover:text-yellow-600">Friendify</div>
         </Link>)}
-        {token !== null && (<Link to='/profile/dashboard'>
+        {token !== null && (<Link to='/dashboard/my-profile'>
           <div className="fontLogo text-3xl hover:font-bold text-yellow-100 hover:text-yellow-50">Friendify</div>
         </Link>)}
         {/* Navigation links */}

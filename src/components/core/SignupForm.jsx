@@ -73,7 +73,8 @@
           
         
           return (
-            <div className="border-2 border-gray-500 p-8 rounded-xl md:min-w-[5%] translate-x-[-2rem] z-10">
+            <div className="border-2 border-gray-500 p-8 rounded-xl md:min-w-[5%] 
+            translate-x-[-2rem] z-10">
               {/* Tab */}
               {/* <Tab tabData={tabData} field={accountType} setField={setAccountType} /> */}
               {/* Form */}

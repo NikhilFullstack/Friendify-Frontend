@@ -4,14 +4,12 @@ import { setLoading, setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
 import { profileEndpoints } from "../apis"
 import { logout } from "./authAPI"
-
 const { GET_USER_DETAILS_API,
         GET_ALL_USER_PRESENT_API,
         DELETE_USER_API,
         UPDATE_PROFILE_OF_USER_API,
         UPDATE_PROFILE_PICTURE_API,
         SEARCH_USER_API } = profileEndpoints
-
 export function getUserDetails(token, navigate) {
 
   return async (dispatch) => {
@@ -26,11 +24,11 @@ export function getUserDetails(token, navigate) {
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
-      console.log("121:",response.data)
-      const userImage = response.data.post.image
-        ? response.data.post.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.data.firstName} ${response.data.data.lastName}`
-      dispatch(setUser({ ...response.data.data, image: userImage }))
+      console.log("121:",response.data.post)
+      // const userImage = response.data.post.image
+      //   ? response.data.post.image
+      //   : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.data.firstName} ${response.data.data.lastName}`
+      dispatch(setUser({ ...response.data}))
     } catch (error) {
       dispatch(logout(navigate))
       console.log("GET_USER_DETAILS API ERROR............", error)

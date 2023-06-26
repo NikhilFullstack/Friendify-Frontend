@@ -2,9 +2,16 @@ import { toast } from "react-hot-toast"
 
 import { apiConnector } from "../apiconnector"
 import { postEndpoints } from "../apis"
+import { setFeedData, setLoading } from "../../slices/feedSlice"
+import { profileEndpoints } from "../apis"
 
-const { CREATE_POST_API, GET_ALL_POST_API,UPDATE_POST_API,DELETE_POST_API,LIKE_POST_API,UNLIKE_POST_API } = postEndpoints
-
+const { CREATE_POST_API,
+        GET_ALL_POST_API,
+        UPDATE_POST_API,
+        DELETE_POST_API,
+        LIKE_POST_API,
+        UNLIKE_POST_API } = postEndpoints
+const { SEARCH_USER_API } = profileEndpoints
 export const createPost = async (data, token) => {
     let result = null
     const toastId = toast.loading("Loading...")
@@ -26,7 +33,8 @@ export const createPost = async (data, token) => {
     return result
   }
 
-export const getAllPost = async (token) => {
+export const getAllPost = async (token,dispatch) => {
+    dispatch(setLoading(true))
     let result = []
     const toastId = toast.loading("Loading...")
     try {
@@ -40,14 +48,17 @@ export const getAllPost = async (token) => {
       )
       console.log("INSTRUCTOR COURSES API RESPONSE............", response)
       if (!response?.data?.success) {
-        throw new Error("Could Not Fetch Instructor Courses")
+        throw new Error("Could Not Fetch feed post")
       }
-      result = response?.data?.data
+      result = response?.data
+      dispatch(setFeedData(result));
     } catch (error) {
-      console.log("INSTRUCTOR COURSES API ERROR............", error)
+      console.log("fetch post API ERROR............", error)
       toast.error(error.message)
     }
+
     toast.dismiss(toastId)
+    dispatch(setLoading(false))
     return result
   }
 

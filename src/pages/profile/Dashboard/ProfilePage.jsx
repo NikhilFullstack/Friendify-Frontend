@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetails } from "../../../services/operations/profileAPI"
 import { useNavigate } from 'react-router-dom';
 
-
 function ProfilePage() {
   const { token } = useSelector((state) => state.auth)
   const dispatch = useDispatch();
@@ -12,8 +11,13 @@ function ProfilePage() {
   useEffect(()=>{ async function fetchData () {
     try{
       console.log("token:",token);
-      const response =await dispatch(getUserDetails(token, navigate));
-    console.log("GetUserDetails.......",response)
+      const res = await dispatch(getUserDetails(token, navigate));
+      // .then((res)=>{
+      //   console.log("set user ab hoga ",res);
+      //   dispatch(setUser(res))
+      // }
+        // );
+      
     }
     catch(err){
       console.log("error in fetching user details",err,err.message);

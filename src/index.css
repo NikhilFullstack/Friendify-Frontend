@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 *{
-  overflow-y: hidden;
+  overflow-x: hidden;
 }
 .spinner {
     display: inline-block;

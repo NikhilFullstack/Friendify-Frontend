@@ -40,3 +40,6 @@
   .fontLogo{
     font-family: 'Dancing Script', cursive;
   }
+  .magic{
+    scale: 0;
+  }

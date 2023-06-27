@@ -2,7 +2,7 @@ import { toast } from "react-hot-toast"
 
 import { apiConnector } from "../apiconnector"
 import { postEndpoints } from "../apis"
-import { setFeedData, setLoading } from "../../slices/feedSlice"
+import { setFeed, setFeedLoading } from "../../slices/feedSlice"
 import { profileEndpoints } from "../apis"
 
 const { CREATE_POST_API,
@@ -34,7 +34,7 @@ export const createPost = async (data, token) => {
   }
 
 export const getAllPost = async (token,dispatch) => {
-    dispatch(setLoading(true))
+    dispatch(setFeedLoading(true))
     let result = []
     const toastId = toast.loading("Loading...")
     try {
@@ -51,14 +51,14 @@ export const getAllPost = async (token,dispatch) => {
         throw new Error("Could Not Fetch feed post")
       }
       result = response?.data
-      dispatch(setFeedData(result));
+      dispatch(setFeed(result));
     } catch (error) {
       console.log("fetch post API ERROR............", error)
       toast.error(error.message)
     }
 
     toast.dismiss(toastId)
-    dispatch(setLoading(false))
+    dispatch(setFeedLoading(false))
     return result
   }
 

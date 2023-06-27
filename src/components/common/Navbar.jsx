@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   AiOutlineMenu
 } from "react-icons/ai"
@@ -8,37 +8,55 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, matchPath, useLocation, useNavigate } from "react-router-dom"
 
 import { NavbarLinks } from "../../data/navbar-links"
-
-import { logout } from "../../services/operations/authAPI"
 import { searchUser } from "../../services/operations/profileAPI"
+import { logout } from "../../services/operations/authAPI"
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth)
-  const { searchData } = useSelector((state) => state.search)
 
   const location = useLocation()
-  const [search, setSearch] = useState('')
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  const [search,setSearch] = useState(null);
+  const [data, setData ] = useState({"search":'',});
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname)
   }
 
-  const handleOnChange = (e) => {
-    setSearch((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value,
+  function changeHandler(e){
+    setData((pre)=>({
+      ...pre,
+      [e.target.name]:[e.target.value]
     }))
   }
+  function searchHandler(e){
+    e.preventDefault();
+    async function seArch(){
+      try{
+        console.log("yaha aa gye");
+        await searchUser(data,token,navigate);
 
-  // Handle Form Submission
-  const handleOnSubmit = async (e) => {
-    e.preventDefault()
-    const user = await searchUser(search, token);
+
+
+        await searchUser(data,token,navigate).then(
+          (res)=>{
+            console.log("Search in setSearch.!!!!......../",res);
+
+            setSearch(res);
+            console.log("Search in setSearch........./",res);
+          }
+        )
+      }
+      catch(err){
+        console.log("searching error.....",err);
+      }
+    }
+    seArch();
 
   }
-  // const parms = token===null ? (\) : (\profile\dashboard)
+
+
   return (
     <div
       className={`flex h-14 items-center justify-center border-b-[1px] border-b-gray-700 ${location.pathname !== "/" ? "bg-gray-800" : ""
@@ -94,26 +112,23 @@ function Navbar() {
         {token !== null && <nav className="hidden md:block">
           <div className="flex gap-x-6 text-slate-50">
 
-            <form className="flex items-center" onSubmit={handleOnSubmit}>
+            <form className="flex items-center" onSubmit={searchHandler}>
               <label for="simple-search" className="sr-only">Search</label>
               <div className="relative w-full">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                 </div>
-                <input type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="search" placeholder="Search" onChange={handleOnChange} required />
+                <input type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="search" placeholder="Search" required onChange={changeHandler} />
               </div>
               <button type="submit" className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <span className="sr-only">Search</span>
               </button>
             </form>
-              <div>
-                        {
-                          searchData!==null && (
-                          <div className="">
-                                {console.log("search kaam kr gya....",searchData)}
-                          </div>)
-                        }
+              <div className="" id="">
+                     
+
+
               </div>
           </div>
         </nav>}

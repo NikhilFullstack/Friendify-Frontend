@@ -25,7 +25,7 @@ function ProfilePage() {
       
       await dispatch(getUserDetails(token, navigate)).then((res)=>{
         setUserDetails(res.data.post);
-        console.log(userDetails);
+        console.log("user",userDetails);
         console.log("GetUserDetails.......",res);
       });
     }

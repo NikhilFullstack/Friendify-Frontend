@@ -3,7 +3,12 @@ import { toast } from "react-hot-toast"
 import { apiConnector } from "../apiconnector"
 import { commentEndpoints } from "../apis"
 
-const { CREATE_COMMENT_API, UPDATE_COMMENT_API,DELETE_COMMENT_API,CREATE_REPLY_API,UPDATE_REPLY_API,DELETE_REPLY_API } = commentEndpoints
+const {   CREATE_COMMENT_API,
+          UPDATE_COMMENT_API,
+          DELETE_COMMENT_API,
+          CREATE_REPLY_API,
+          UPDATE_REPLY_API,
+          DELETE_REPLY_API } = commentEndpoints
 
 export const createComment = async (data, token) => {
     let result = null

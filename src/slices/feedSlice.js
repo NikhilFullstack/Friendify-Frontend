@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: null,
-  loading: false,
+  feed: null,
+  feedLoading: false,
 };
 
 const feedSlice = createSlice({
   name: "feed",
   initialState: initialState,
   reducers: {
-    setFeedData(state, value) {
+    setFeed(state, value) {
       state.data = value.payload??null;
     },
-    setLoading(state, value) {
+    setFeedLoading(state, value) {
       state.loading = value.payload??false;
     },
     
   },
 });
 
-export const { setFeedData, setLoading } = feedSlice.actions;
+export const { setFeed, setFeedLoading } = feedSlice.actions;
 
 export default feedSlice.reducer;

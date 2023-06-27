@@ -1,7 +1,7 @@
 export const NavbarLinks = [
   {
     title: "Home",
-    path: "/profile/dashboard",
+    path: "/dashboard/my-profile",
   },
   {
     title: "Video",

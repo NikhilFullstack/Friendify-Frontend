@@ -4,6 +4,9 @@ import { setLoading, setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
 import { profileEndpoints } from "../apis"
 import { logout } from "./authAPI"
+import { setSearchData, setLoadingSearch } from "../../slices/searchSlice"
+
+
 const { GET_USER_DETAILS_API,
         GET_ALL_USER_PRESENT_API,
         DELETE_USER_API,
@@ -155,8 +158,9 @@ export function updateProfilePicture(token, formData) {
   }
 }
 
-export const searchUser = async (data, token) => {
+export const searchUser = async (data, token, dispatch) => {
   let result = null
+  dispatch(setLoadingSearch(true));
   const toastId = toast.loading("Loading...")
   try {
     const response = await apiConnector("GET", SEARCH_USER_API, data, {
@@ -174,5 +178,7 @@ export const searchUser = async (data, token) => {
     toast.error(error.message)
   }
   toast.dismiss(toastId)
+  dispatch(setSearchData(result));
+  dispatch(setLoadingSearch(false));
   return result
 }

@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllPost } from "../../../services/operations/PostAPI"
-import Post_Card from '../../../components/common/Post_Card';
+import PostCard from '../../../components/common/PostCard';
+import {  useNavigate } from 'react-router';
+import { logout } from "../../../services/operations/authAPI"
+
 // import { useNavigate } from 'react-router-dom';
 
 function Post() {
 
   const { token } = useSelector((state) => state.auth)
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
@@ -15,16 +18,13 @@ function Post() {
     async function fetchData() {
       try {
         console.log("token:", token);
-        const res = await dispatch(getAllPost(token, dispatch));
-        // .then((res)=>{
-        //   console.log("set user ab hoga ",res);
-        //   dispatch(setUser(res))
-        // }
-        // );
+        await dispatch(getAllPost(token, dispatch));
+        
 
       }
       catch (err) {
         console.log("error in fetching All post feed", err, err.message);
+        dispatch(logout(navigate))
       }
     }
     fetchData();
@@ -35,15 +35,14 @@ function Post() {
 
     <div className='flex flex-row w-full h-auto'>
 
-      <div className='flex flex-col w-[23%] mx-[1%]'></div>
-      <div className='flex flex-col w-[48%] mx-[1%]'>
+      <div className='flex flex-col  mx-[1%]'>
         {loading ? (<div>Spinner</div>) : (
 
           <div className=''>
             {
               data?.posts
                 .map((Post, index) => (
-                  <Post_Card post={Post} key={index} />
+                  <PostCard post={Post} key={index} />
                 ))
             }
 
@@ -51,7 +50,6 @@ function Post() {
 
         )}
       </div>
-      <div className='flex flex-col w-[23%] mx-[1%]'></div>
 
 
     </div>

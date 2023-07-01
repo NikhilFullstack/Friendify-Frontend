@@ -1,18 +1,15 @@
 export const NavbarLinks = [
   {
-    title: "Home",
-    path: "/dashboard/my-profile",
+    title: "Explore",
+    path: "/",
+  },
+  
+  {
+    title: "Feed",
+    path: "/",
   },
   {
-    title: "Video",
-    // path: '/video',
-  },
-  {
-    title: "Post",
-    path: "/post",
-  },
-  {
-    title: "Setting",
+    title: "Profile",
     path: "/setting",
   },
 ];

@@ -106,6 +106,7 @@ export function login(email, password, navigate) {
       localStorage.setItem("token", JSON.stringify(response.data.token))
       localStorage.setItem("firstName", JSON.stringify(response.data.existedEmail.firstName))
       localStorage.setItem("lastName", JSON.stringify(response.data.existedEmail.lastName))
+      localStorage.setItem("image", JSON.stringify(response.data.existedEmail.image))
 
       navigate("/")
     } catch (error) {

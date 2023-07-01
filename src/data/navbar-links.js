@@ -1,7 +1,7 @@
 export const NavbarLinks = [
   {
     title: "Explore",
-    path: "/",
+    path: "/explore",
   },
   
   {

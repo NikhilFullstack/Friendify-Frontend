@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import {
   AiOutlineMenu
 } from "react-icons/ai"
@@ -12,58 +12,66 @@ import { searchUser } from "../../services/operations/profileAPI"
 import { logout } from "../../services/operations/authAPI"
 
 function Navbar() {
-  const { token } = useSelector((state) => state.auth)
 
   const location = useLocation()
   const navigate = useNavigate();
+  const [tokenn, setToken] = useState(null)
+  
+  // useEffect(
+  //   <>
+  //     {const {token} = useSelector((state) => state.auth)}
+  //     {setToken(token);}
+  //   </>
 
+  //   , [])
   const dispatch = useDispatch();
-  const [search,setSearch] = useState(null);
-  const [data, setData ] = useState({"search":'',});
+  const [search, setSearch] = useState(null);
+  const [data, setData] = useState({ "search": '', });
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname)
   }
 
-  function changeHandler(e){
-    setData((pre)=>({
+  function changeHandler(e) {
+    setData((pre) => ({
       ...pre,
-      [e.target.name]:[e.target.value]
+      [e.target.name]: [e.target.value]
     }))
   }
-  function searchHandler(e){
+  function searchHandler(e) {
     e.preventDefault();
-    async function seArch(){
-      try{
+    async function seArch() {
+      try {
         console.log("yaha aa gye");
-        await searchUser(data,token,navigate);
+        await searchUser(data, token, navigate);
 
 
 
-        await searchUser(data,token,navigate).then(
-          (res)=>{
-            console.log("Search in setSearch.!!!!......../",res);
+        await searchUser(data, token, navigate).then(
+          (res) => {
+            console.log("Search in setSearch.!!!!......../", res);
 
             setSearch(res);
-            console.log("Search in setSearch........./",res);
+            console.log("Search in setSearch........./", res);
           }
         )
       }
-      catch(err){
-        console.log("searching error.....",err);
+      catch (err) {
+        console.log("searching error.....", err);
       }
     }
     seArch();
 
   }
 
-
+  const {token}=useSelector((state)=>state.auth)
   return (
     <div
       className={`flex h-14 items-center justify-center border-b-[1px] border-b-gray-700 bg-gray-800 transition-all duration-200 `}
     >
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
-        {/* Logo */}
-
+              {/* Logo */}
+              {/* {setToken({token}=useSelector((state)=>state.auth)) }
+              {console.log("asa",token)} */}
         {token === null && (<Link to='/'>
           <div className="fontLogo text-3xl hover:text-[32px] hover:font-extrabold text-green-600 hover:text-yellow-600">Friendify</div>
         </Link>)}
@@ -124,11 +132,11 @@ function Navbar() {
                 <span className="sr-only">Search</span>
               </button>
             </form>
-              <div className="" id="">
-                     
+            <div className="" id="">
 
 
-              </div>
+
+            </div>
           </div>
         </nav>}
         {/* Login / Signup / Dashboard */}

@@ -9,6 +9,7 @@ import Post from './pages/profile/FeedPage/Post';
 import Setting from './pages/profile/Setting/Setting';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DefaultPage from './pages/auth/DefaultPage';
+import Explore from './pages/profile/FeedPage/Explore';
 function App() {
   return (
     <div className='overflow-x-hidden min-h-screen w-screen'>
@@ -22,6 +23,7 @@ function App() {
         <Route exact path='/verify-email' element={<VerifyEmail/>} />
         <Route exact path='/dashboard/my-profile' element={<ProfilePage />} />
         <Route exact path='/post' element={<Post/>} />
+        <Route exact path='/explore' element={<Explore/>} />
         <Route exact path='/setting' element={<Setting />}  />
       </Routes>
     </div>

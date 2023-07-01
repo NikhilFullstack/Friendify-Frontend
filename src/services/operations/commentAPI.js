@@ -10,9 +10,11 @@ const {   CREATE_COMMENT_API,
           UPDATE_REPLY_API,
           DELETE_REPLY_API } = commentEndpoints
 
-export const createComment = async (data, token) => {
+export function createComment(data,token){
+return async (dispatch)=>{
     let result = null
     const toastId = toast.loading("Loading...")
+    console.log(data,"comment data");
     try {
       const response = await apiConnector("POST", CREATE_COMMENT_API, data, {
         Authorization: `Bearer ${token}`,
@@ -30,6 +32,7 @@ export const createComment = async (data, token) => {
     toast.dismiss(toastId)
     return result
   }
+}
 
   export const createReply = async (data, token) => {
     let result = null

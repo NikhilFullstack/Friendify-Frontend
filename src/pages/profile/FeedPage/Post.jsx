@@ -9,7 +9,8 @@ import { logout } from "../../../services/operations/authAPI"
 
 function Post() {
 
-  const { token } = useSelector((state) => state.auth)
+  const { token } = useSelector((state) => state.auth);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const navigate = useNavigate();
@@ -18,9 +19,10 @@ function Post() {
     async function fetchData() {
       try {
         console.log("token:", token);
-        await dispatch(getAllPost(token, dispatch));
+        await dispatch(getAllPost(token)).then((res)=>{
+          console.log(res,"resposne has been recived");
+        });
         
-
       }
       catch (err) {
         console.log("error in fetching All post feed", err, err.message);
@@ -28,9 +30,11 @@ function Post() {
       }
     }
     fetchData();
-  }, [])
+  }, []);
+
   const { data } = useSelector((state) => state.feed)
   const { loading } = useSelector((state) => state.feed)
+  console.log(data,"hello");
   return (
 
     <div className='flex flex-row w-full h-auto'>

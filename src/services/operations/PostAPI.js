@@ -34,8 +34,8 @@ export const createPost = async (data, token) => {
   return result
 }
 
-export function getAllPost(token) {
-  return async (dispatch)=>{
+export function getAllPost(token){
+return async (dispatch) => {
     dispatch(setFeedLoading(true))
     let result = []
     const toastId = toast.loading("Loading...")
@@ -61,9 +61,8 @@ export function getAllPost(token) {
 
     toast.dismiss(toastId)
     dispatch(setFeedLoading(false))
-    return result
+    return result;
   }
-
 }
 
 

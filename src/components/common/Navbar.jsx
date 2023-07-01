@@ -59,8 +59,7 @@ function Navbar() {
 
   return (
     <div
-      className={`flex h-14 items-center justify-center border-b-[1px] border-b-gray-700 ${location.pathname !== "/" ? "bg-gray-800" : ""
-        } transition-all duration-200 `}
+      className={`flex h-14 items-center justify-center border-b-[1px] border-b-gray-700 bg-gray-800 transition-all duration-200 `}
     >
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
         {/* Logo */}
@@ -68,7 +67,7 @@ function Navbar() {
         {token === null && (<Link to='/'>
           <div className="fontLogo text-3xl hover:text-[32px] hover:font-extrabold text-green-600 hover:text-yellow-600">Friendify</div>
         </Link>)}
-        {token !== null && (<Link to='/dashboard/my-profile'>
+        {token !== null && (<Link to='/'>
           <div className="fontLogo text-3xl hover:font-bold text-yellow-100 hover:text-yellow-50">Friendify</div>
         </Link>)}
         {/* Navigation links */}

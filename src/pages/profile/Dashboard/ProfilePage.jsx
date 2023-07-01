@@ -16,12 +16,6 @@ function ProfilePage() {
   useEffect(()=>{ async function fetchData () {
     try{
       console.log("token:",token);
-      const res = await dispatch(getUserDetails(token, navigate));
-      // .then((res)=>{
-      //   console.log("set user ab hoga ",res);
-      //   dispatch(setUser(res))
-      // }
-        // );
       
       await dispatch(getUserDetails(token, navigate)).then((res)=>{
         setUserDetails(res.data.post);

@@ -35,14 +35,10 @@ function Navbar() {
     async function seArch(){
       try{
         console.log("yaha aa gye");
-        await searchUser(data,token,navigate);
-
-
-
-        await searchUser(data,token,navigate).then(
+       console.log(data);
+        await dispatch(searchUser(data,token,navigate)).then(
           (res)=>{
             console.log("Search in setSearch.!!!!......../",res);
-
             setSearch(res);
             console.log("Search in setSearch........./",res);
           }

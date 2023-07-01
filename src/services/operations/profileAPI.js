@@ -153,8 +153,7 @@ export async function getAllUserPresent(token, navigate) {
 //   }
 // }
 
-export const searchUser = async (data, token,navigate) => {
-
+export async function searchUser(data, token,navigate){
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setSearchLoading(true))

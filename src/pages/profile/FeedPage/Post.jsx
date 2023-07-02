@@ -41,12 +41,12 @@ function Post() {
 
       <div className='flex flex-col  mx-[1%]'>
         {loading ? (<div>Spinner</div>) : (
-
           <div className=''>
+
             {
               data?.posts
-                .map((Post, index) => (
-                  <PostCard post={Post} key={index} />
+                .map((Post, _id) => (
+                  <PostCard post={Post} key={_id} />
                 ))
             }
 

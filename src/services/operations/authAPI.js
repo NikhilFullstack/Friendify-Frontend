@@ -105,6 +105,8 @@ export function login(email, password, navigate) {
       localStorage.setItem("firstName", JSON.stringify(response.data.existedEmail.firstName))
       localStorage.setItem("lastName", JSON.stringify(response.data.existedEmail.lastName))
       localStorage.setItem("image", JSON.stringify(response.data.existedEmail.image))
+      localStorage.setItem("userId", JSON.stringify(response.data.existedEmail._id))
+
 
       navigate("/")
     } catch (error) {

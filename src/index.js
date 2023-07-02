@@ -5,7 +5,8 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import rootReducer from "./reducer/index";
-import {configureStore,} from "@reduxjs/toolkit"
+
+import {configureStore} from "@reduxjs/toolkit"
 import { Toaster } from "react-hot-toast";
 import thunk from "redux-thunk";
 
